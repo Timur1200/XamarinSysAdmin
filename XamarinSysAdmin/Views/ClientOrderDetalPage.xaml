@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSysAdmin.Views.ClientOrderDetalPage"
+             Title="Запрос">
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Тема:" FontSize="Medium" />
+        <Label Text="{Binding Theme}" FontSize="Small"/>
+        
+        <Label Text="Описание:" FontSize="Medium" />
+        <Label Text="{Binding Desc}" FontSize="Small"/>
+
+        <Label Text="Статус:" FontSize="Medium" />
+        <Label Text="{Binding StatusText}" FontSize="Small"/>
+
+        <Label Text="Дата ответа:" FontSize="Medium" />
+        <Label Text="{Binding Date2D}" FontSize="Small"/>
+
+        <Label Text="Ответ:" FontSize="Medium" />
+        <Label Text="{Binding Answer}" FontSize="Small"/>
+
+       
+    </StackLayout>
+</ContentPage>

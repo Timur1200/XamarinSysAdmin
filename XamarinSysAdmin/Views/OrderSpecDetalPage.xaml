@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSysAdmin.Views.OrderSpecDetalPage" >
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label HorizontalTextAlignment="Center" Text="{Binding Theme}" FontSize="Medium" />
+        
+        <Label  FontSize="Title">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Дата отправки: "/>
+                        <Span Text="{Binding Date1D}" />
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label  FontSize="Title">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Описание: "/>
+                        <Span Text="{Binding Desc}" />
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Entry x:Name="AnsEntry" Placeholder="Напишите ответное сообщение" />
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Добавить" Clicked="AddMaterial"  HorizontalOptions="FillAndExpand"></Button>
+            <Button  x:Name="BtnSave" Text="Убрать"  HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+        <Button  Clicked="SaveClick" Text="Завершить" ></Button>
+        <ListView x:Name="LViewPhoto" ItemSelected="LViewPhoto_ItemSelected" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                           
+                            <Label HorizontalOptions="Center" FontSize="Title">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="{Binding Name}"/>
+                                            <Span Text=" X " />
+                                            <Span Text="{Binding AmountInList}" />
+                                            <Span Text=" шт." />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+       
+    </StackLayout>
+</ContentPage>

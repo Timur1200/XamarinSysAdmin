@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSysAdmin.Views.StorageListPage">
+   
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="LViewPhoto" ItemSelected="LViewPhoto_ItemSelected" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Margin="5" FontSize="30" HorizontalOptions="Center" Text="{Binding MaterialName}"></Label>
+                                <Image  HeightRequest="250" Source="{Binding Img1}" HorizontalOptions="FillAndExpand"></Image>
+                                <Label HorizontalOptions="Center" FontSize="Title">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding Amount}"/>
+                                                <Span Text=" штук в наличии" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label HorizontalOptions="Center" FontSize="Title">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding Price}"/>
+                                                <Span Text=" Руб" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
