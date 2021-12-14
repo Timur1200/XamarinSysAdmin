@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinSysAdmin.Views.AdminOrderDetalPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Тема:" FontSize="Medium" />
+            <Label Text="{Binding Theme}" FontSize="Small"/>
+
+            <Label Text="Описание:" FontSize="Medium" />
+            <Label Text="{Binding Desc}" FontSize="Small"/>
+
+            <Label Text="Дата:" FontSize="Medium" />
+            <Label Text="{Binding Date1D}" FontSize="Small"/>
+
+            <Picker ItemDisplayBinding="{Binding Fio}" x:Name="SpecPicker"></Picker>
+
+            <Button Margin="0,10,0,0" Text="Отправить"
+                       Clicked="SaveClick"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

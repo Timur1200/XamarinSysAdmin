@@ -30,6 +30,7 @@ namespace XamarinSysAdmin.Views
         private void SelectNull()
         {
             LViewPhoto.SelectedItem = null;
+            _materialList = new MaterialList();
             return;
         }
 
@@ -46,7 +47,7 @@ namespace XamarinSysAdmin.Views
                 SelectNull();
                 return;
             }
-
+            
             Storage storage = LViewPhoto.SelectedItem as Storage;
             if (storage.Amount < i)
             {

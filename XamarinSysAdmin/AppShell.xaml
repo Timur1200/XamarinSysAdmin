@@ -85,17 +85,21 @@
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
 
-    <FlyoutItem x:Name="ClientOrderItem" Title="Запросы" Icon="icon_about.png">
+    <FlyoutItem x:Name="ClientOrderItem" Title="Запросы" Icon="icon_feed.png">
         <ShellContent Route="ClientOrdersPage" ContentTemplate="{DataTemplate local:ClientOrdersPage}" />
     </FlyoutItem>
 
-    <FlyoutItem x:Name="SpecOrderItem" Title="Текущие вызовы" Icon="icon_about.png">
+    <FlyoutItem x:Name="SpecOrderItem" Title="Текущие вызовы" Icon="icon_feed.png">
         <ShellContent Route="SpecOrderPage" ContentTemplate="{DataTemplate local:SpecOrderPage}" />
     </FlyoutItem>
 
-    <FlyoutItem x:Name="BrowseItem" Title="Browse" Icon="icon_feed.png">
-        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <FlyoutItem x:Name="AdminOrderItem" Title="Запросы сотрудников" Icon="icon_feed.png">
+        <ShellContent Route="AdminOrderPage" ContentTemplate="{DataTemplate local:AdminOrderPage}" />
     </FlyoutItem>
+
+    <!--FlyoutItem x:Name="BrowseItem" Title="Browse" Icon="icon_feed.png">
+        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    </FlyoutItem-->
 
     
     <MenuItem  x:Name="LogoutItem" Text="Выйти" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

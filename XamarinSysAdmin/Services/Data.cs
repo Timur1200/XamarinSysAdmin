@@ -149,6 +149,16 @@ namespace XamarinSysAdmin.Services
             return select;
         }
 
+        public List<Quire> SelectQuireAdmin()
+        {
+           return data<Quire>("getQuireAdmin");       
+        }
+
+        public List<Spec> SelectOnlySpec()
+        {
+            return data<Spec>("getOnlySpec");
+        }
+
         public List<Storage> SelectStorage()
         {
             return data<Storage>("Storages");
@@ -179,6 +189,25 @@ namespace XamarinSysAdmin.Services
                 q.Status = 2;
                 q.Date2 = DateTime.Now;
                 q.Answer = ans;
+                var Client = new WebClient();
+                Client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                var result = Client.UploadString($"http://{ip}/api/Quires/{q.IdQuire}", "PUT", JsonConvert.SerializeObject(q)
+                    );
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateQuireAdmin(Quire q, Spec s)
+        {
+            try
+            {
+                q.Status = 1;
+                q.SpecId = s.IdSpec;
+               
                 var Client = new WebClient();
                 Client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 var result = Client.UploadString($"http://{ip}/api/Quires/{q.IdQuire}", "PUT", JsonConvert.SerializeObject(q)

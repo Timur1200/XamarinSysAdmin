@@ -19,6 +19,7 @@ namespace XamarinSysAdmin
             Routing.RegisterRoute(nameof(ClientOrderDetalPage), typeof(ClientOrderDetalPage));
             Routing.RegisterRoute(nameof(OrderSpecDetalPage), typeof(OrderSpecDetalPage));
             Routing.RegisterRoute(nameof(StorageListPage), typeof(StorageListPage));
+            Routing.RegisterRoute(nameof(AdminOrderDetalPage), typeof(AdminOrderDetalPage));
 
             aShell = this;
             
@@ -28,9 +29,10 @@ namespace XamarinSysAdmin
         private void allVisible()
         {
             aShell.AboutItem.FlyoutItemIsVisible = true;
-            aShell.BrowseItem.FlyoutItemIsVisible = true;
+         //   aShell.BrowseItem.FlyoutItemIsVisible = true;
             aShell.ClientOrderItem.FlyoutItemIsVisible = false;
-
+            aShell.SpecOrderItem.FlyoutItemIsVisible = false;
+            aShell.AdminOrderItem.FlyoutItemIsVisible = false;
             
         }
         public static void Reload()
@@ -40,12 +42,13 @@ namespace XamarinSysAdmin
 
             if (Personal.Session.Acc == 2)
             {
-                
+                aShell.AdminOrderItem.FlyoutItemIsVisible = true;
             }
 
             else if (Personal.Session.Acc == 1)
             {
-             //   aShell.BrowseItem.FlyoutItemIsVisible = false;
+                //   aShell.BrowseItem.FlyoutItemIsVisible = false;
+                aShell.SpecOrderItem.FlyoutItemIsVisible = true;
             }
 
             else if (Personal.Session.Acc == 0)
