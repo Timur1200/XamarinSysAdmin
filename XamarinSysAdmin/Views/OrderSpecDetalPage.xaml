@@ -29,7 +29,7 @@
         <Entry x:Name="AnsEntry" Placeholder="Напишите ответное сообщение" />
         <StackLayout Orientation="Horizontal">
             <Button Text="Добавить" Clicked="AddMaterial"  HorizontalOptions="FillAndExpand"></Button>
-            <Button  x:Name="BtnSave" Text="Убрать"  HorizontalOptions="FillAndExpand"></Button>
+            <Button  x:Name="BtnSave" Clicked="DelMaterialClicked" Text="Убрать"  HorizontalOptions="FillAndExpand"></Button>
         </StackLayout>
         <Button  Clicked="SaveClick" Text="Завершить" ></Button>
         <ListView x:Name="LViewPhoto" ItemSelected="LViewPhoto_ItemSelected" HasUnevenRows="True">

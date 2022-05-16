@@ -52,5 +52,10 @@ namespace XamarinSysAdmin.Views
                 await DisplayAlert("Уведомление","Действие отменено","ок");
             }
         }
+
+        private void DelMaterialClicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
