@@ -22,7 +22,7 @@ namespace XamarinSysAdmin.Views
         protected override void OnAppearing()
         {
             BindingContext = _quire;
-            SpecPicker.ItemsSource = Data.get().SelectOnlySpec();
+            SpecPicker.ItemsSource = RequestsAPI.get().SelectOnlySpec();
         }
 
        async private void SaveClick(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace XamarinSysAdmin.Views
                 return;
             }
             Spec s = SpecPicker.SelectedItem as Spec;
-            if (Data.get().UpdateQuireAdmin(_quire, s))
+            if (RequestsAPI.get().UpdateQuireAdmin(_quire, s))
             {
                 await DisplayAlert("Успешно", "Данные были отправлены", "ок");
                 await Shell.Current.GoToAsync("..");

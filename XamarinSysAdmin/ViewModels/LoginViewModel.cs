@@ -33,7 +33,7 @@ namespace XamarinSysAdmin.ViewModels
         {
             try { 
             {
-                foreach (var user in Data.get().SelectUsers())
+                foreach (var user in RequestsAPI.get().SelectUsers())
                 {
                     if (login == user.Login && pass == user.Pass)
                     {
@@ -45,7 +45,7 @@ namespace XamarinSysAdmin.ViewModels
                     }
                 }
 
-                foreach (var user in Data.get().SelectSpec())
+                foreach (var user in RequestsAPI.get().SelectSpec())
                 {
                     if (login == user.Login && pass == user.Pass)
                     {

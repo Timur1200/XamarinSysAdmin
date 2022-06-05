@@ -54,7 +54,7 @@ namespace XamarinSysAdmin.Views
               }
            
 
-            if (Data.get().InsertQuire(quire))
+            if (RequestsAPI.get().InsertQuire(quire))
             {
                 await DisplayAlert("Успешно!", "Запрос отправлен!", "ОК");
                 BackClick(null, null);

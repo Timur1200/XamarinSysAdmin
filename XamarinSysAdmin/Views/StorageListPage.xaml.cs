@@ -23,7 +23,7 @@ namespace XamarinSysAdmin.Views
 
         protected override void OnAppearing()
         {
-            LViewPhoto.ItemsSource = Data.get().SelectStorage();
+            LViewPhoto.ItemsSource = RequestsAPI.get().SelectStorage();
             _materialList = new MaterialList();
         }
 
@@ -61,10 +61,10 @@ namespace XamarinSysAdmin.Views
                 _materialList.ReqId = OrderSpecDetalPage.quire.IdQuire;
                 _materialList.MaterId = storage.IdMaterial;
 
-                if (Data.get().InsertMaterialList(_materialList))
+                if (RequestsAPI.get().InsertMaterialList(_materialList))
                 {
 
-                    Data.get().UpdateStorage(storage, i);
+                    RequestsAPI.get().UpdateStorage(storage, i);
                     await Shell.Current.GoToAsync("..");
                 }
                 else

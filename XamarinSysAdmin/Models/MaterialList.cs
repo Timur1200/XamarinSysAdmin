@@ -12,7 +12,7 @@ namespace XamarinSysAdmin.Models
         public Nullable<int> MaterId { get; set; }
         public Nullable<int> AmountInList { get; set; }
 
-        private static List<Storage> str = Data.get().SelectStorage();
+        private static List<Storage> str = RequestsAPI.get().SelectStorage();
         public string Name
         {
             get

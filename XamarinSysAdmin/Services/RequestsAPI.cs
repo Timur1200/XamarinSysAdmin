@@ -10,12 +10,12 @@ using XamarinSysAdmin.Views;
 
 namespace XamarinSysAdmin.Services
 {
-    class Data
+    class RequestsAPI
     {
-        private static Data Context { get; set; }
-        public static Data get()
+        private static RequestsAPI Context { get; set; }
+        public static RequestsAPI get()
         {
-            if (Context == null) Context = new Data();
+            if (Context == null) Context = new RequestsAPI();
             return Context;
         }
 
@@ -40,13 +40,17 @@ namespace XamarinSysAdmin.Services
         
         private  WebClient client = new WebClient();
         
-        private  List<T> data<T>(string apiPath)
+        private  List<T> Request<T>(string apiPath)
         {
             var b = client.DownloadString($"http://{ip}/api/{apiPath}" );
             return JsonConvert.DeserializeObject<List<T>>(b);
         }
+        private T Request<T>(string apiPath,bool bo)
+        {
+            var b = client.DownloadString($"http://{ip}/api/{apiPath}");
+            return JsonConvert.DeserializeObject<T>(b);
+        }
 
-        
 
         public List<Users> SelectUsers()
         {
@@ -58,12 +62,17 @@ namespace XamarinSysAdmin.Services
 
         public List<Spec> SelectSpec()
         {
-           return data<Spec>("Specs");
+           return Request<Spec>("Specs");
+        }
+
+        public Storage SelectStorage(int id)
+        {
+            return (Request<Storage>($"Storages/{id}",false));
         }
 
         public List<Quire> SelectQuire0()
         {
-            var list = data<Quire>("Quires");
+            var list = Request<Quire>("Quires");
 
 
             
@@ -96,6 +105,11 @@ namespace XamarinSysAdmin.Services
            
 
         }
+        /// <summary>
+        /// Добавляет материал к заявке
+        /// </summary>
+        /// <param name="ml"></param>
+        /// <returns></returns>
         public bool InsertMaterialList(MaterialList ml)
         {
             try 
@@ -112,6 +126,21 @@ namespace XamarinSysAdmin.Services
             {
                 return false;
             }
+        }
+        /// <summary>
+        /// Удаляет материал из списка материалов 
+        /// </summary>
+        /// <param name="DeletedMaterialList">Удаляемый объект</param>
+        public void DeleteMaterialList(MaterialList DeletedMaterialList)
+        {
+            int Id = DeletedMaterialList.IdList;
+            var Client = new WebClient();
+            Client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            var result = Client.UploadString($"http://{ip}/api/materiallists/{Id}", "DELETE", JsonConvert.SerializeObject(Id));
+            // удалили
+            // должны вернуть материал
+            UpdateStorage(SelectStorage(DeletedMaterialList.MaterId.Value),-DeletedMaterialList.AmountInList.Value);
+            
         }
 
         public bool UpdateStorage(Storage s,int i)
@@ -133,7 +162,7 @@ namespace XamarinSysAdmin.Services
 
         public List<Quire> SelectQuireSpec()
         {
-            var list = data<Quire>("Quires");
+            var list = Request<Quire>("Quires");
 
 
 
@@ -151,22 +180,22 @@ namespace XamarinSysAdmin.Services
 
         public List<Quire> SelectQuireAdmin()
         {
-           return data<Quire>("getQuireAdmin");       
+           return Request<Quire>("getQuireAdmin");       
         }
 
         public List<Spec> SelectOnlySpec()
         {
-            return data<Spec>("getOnlySpec");
+            return Request<Spec>("getOnlySpec");
         }
 
         public List<Storage> SelectStorage()
         {
-            return data<Storage>("Storages");
+            return Request<Storage>("Storages");
         }
 
         public List<MaterialList> SelectMaterialList()
         {
-            var list = data<MaterialList>("materiallists");
+            var list = Request<MaterialList>("materiallists");
 
 
 

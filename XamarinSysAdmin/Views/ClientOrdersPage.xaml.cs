@@ -23,7 +23,7 @@ namespace XamarinSysAdmin.Views
 
         protected override void OnAppearing()
         {
-            LView.ItemsSource = Data.get().SelectQuire0();
+            LView.ItemsSource = RequestsAPI.get().SelectQuire0();
         }
 
       async  private void LView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

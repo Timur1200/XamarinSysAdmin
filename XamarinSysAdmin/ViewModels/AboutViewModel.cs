@@ -14,7 +14,7 @@ namespace XamarinSysAdmin.ViewModels
             Title = "Главная";
             AuthCommand = new Command(async () => {
                 try { 
-               var u = Data.get().SelectSpec();
+               var u = RequestsAPI.get().SelectSpec();
                 foreach (var a in u)
                 {
                     var res = await App.Current.MainPage.DisplayAlert(a.FIo, a.Login, "Ok", "Cancel");

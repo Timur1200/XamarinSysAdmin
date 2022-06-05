@@ -23,17 +23,18 @@ namespace XamarinSysAdmin.Views
         protected override void OnAppearing()
         {
             BindingContext = quire;
-            LViewPhoto.ItemsSource = Data.get().SelectMaterialList();
+            LViewPhoto.ItemsSource = RequestsAPI.get().SelectMaterialList();
         }
 
        async private void AddMaterial(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(StorageListPage));
         }
-
-        private void LViewPhoto_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        MaterialList _materialList { get; set; }
+        private async void LViewPhoto_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+             _materialList = (LViewPhoto.SelectedItem as MaterialList);
+           
         }
 
       async private void SaveClick(object sender, EventArgs e)
@@ -42,7 +43,7 @@ namespace XamarinSysAdmin.Views
 
             if (ready)
             {
-                Data.get().UpdateQuire(quire, AnsEntry.Text);
+                RequestsAPI.get().UpdateQuire(quire, AnsEntry.Text);
                await DisplayAlert("Уведомление","Данные были успешно отправлены","ок");
                 await Shell.Current.GoToAsync("..");
             }
@@ -55,7 +56,8 @@ namespace XamarinSysAdmin.Views
 
         private void DelMaterialClicked(object sender, EventArgs e)
         {
-
+            RequestsAPI.get().DeleteMaterialList(_materialList);
+            LViewPhoto.ItemsSource = RequestsAPI.get().SelectMaterialList();
         }
     }
 }
