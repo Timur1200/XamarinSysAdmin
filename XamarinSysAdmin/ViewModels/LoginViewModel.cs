@@ -44,7 +44,6 @@ namespace XamarinSysAdmin.ViewModels
                         return;
                     }
                 }
-
                 foreach (var user in RequestsAPI.get().SelectSpec())
                 {
                     if (login == user.Login && pass == user.Pass)
@@ -59,7 +58,6 @@ namespace XamarinSysAdmin.ViewModels
                 await App.Current.MainPage.DisplayAlert("ВНИМАНИЕ!", "Неверно введен логин или пароль", $"ОК");
             } 
         }
-           // try { }
             catch
             {
                 await App.Current.MainPage.DisplayAlert("Ошибка!", "Возникли проблемы при подключении к серверу", "Ok");

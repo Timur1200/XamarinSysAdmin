@@ -8,50 +8,61 @@ using Xamarin.Forms;
 using XamarinSysAdmin.Models;
 using XamarinSysAdmin.Views;
 
-namespace XamarinSysAdmin.Services
+namespace XamarinSysAdmin
 {
+    /// <summary>
+    /// Данный класс предоставляет доступ к API запросам 
+    /// </summary>
     class RequestsAPI
-    {
+    {   // контекст данных
         private static RequestsAPI Context { get; set; }
         public static RequestsAPI get()
         {
             if (Context == null) Context = new RequestsAPI();
             return Context;
         }
-
-      
-        private string ip
-        {
+        private string  ip //адрес для подключения к API.
+        { // в зависимости от платформа, адрес может отличаться
             get
             {
                 switch (Device.RuntimePlatform)
-                {
+                {  // если андроид
                     case Device.Android:
                         return "10.0.2.2:53187";
-
-
+                    // если iOS
+                    case Device.iOS:
+                        return "10.0.2.2:53187";
+                    // если Universal windows platform
                     case Device.UWP:
                         return "localhost:53187";
 
-                }
-                return null;
+                } // в случае если не удалось определить платформу, выкидываем исключение
+                throw new NotImplementedException();
             }
         }
         
         private  WebClient client = new WebClient();
-        
+        /// <summary>
+        /// Возвращает коллекцию данных List от T
+        /// </summary>
+        /// <typeparam name="T">Требуемый тип объекта</typeparam>
+        /// <param name="apiPath">Контроллер</param>
+        /// <returns></returns>
         private  List<T> Request<T>(string apiPath)
         {
             var b = client.DownloadString($"http://{ip}/api/{apiPath}" );
             return JsonConvert.DeserializeObject<List<T>>(b);
         }
-        private T Request<T>(string apiPath,bool bo)
+        private T RequestObject<T>(string apiPath)
         {
             var b = client.DownloadString($"http://{ip}/api/{apiPath}");
             return JsonConvert.DeserializeObject<T>(b);
         }
 
-
+        /// <summary>
+        /// Получить всех пользователей
+        /// </summary>
+        /// <returns></returns>
         public List<Users> SelectUsers()
         {
             
@@ -59,7 +70,10 @@ namespace XamarinSysAdmin.Services
             List<Users> users = JsonConvert.DeserializeObject<List<Users>>(b);
                 return users;           
         }
-
+        /// <summary>
+        /// получить всех специалистов
+        /// </summary>
+        /// <returns></returns>
         public List<Spec> SelectSpec()
         {
            return Request<Spec>("Specs");
@@ -67,7 +81,7 @@ namespace XamarinSysAdmin.Services
 
         public Storage SelectStorage(int id)
         {
-            return (Request<Storage>($"Storages/{id}",false));
+            return (RequestObject<Storage>($"Storages/{id}"));
         }
 
         public List<Quire> SelectQuire0()
@@ -87,7 +101,11 @@ namespace XamarinSysAdmin.Services
             var select = lQ.OrderByDescending(q => q.Date1).ToList();
             return select;
         }
-
+        /// <summary>
+        /// Создать заявку
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
         public bool InsertQuire(Quire q)
         {
             try
@@ -101,9 +119,6 @@ namespace XamarinSysAdmin.Services
             {
                 return false;
             }
-           
-           
-
         }
         /// <summary>
         /// Добавляет материал к заявке
@@ -117,9 +132,6 @@ namespace XamarinSysAdmin.Services
                 var Client = new WebClient();
                 Client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 var result = Client.UploadString($"http://{ip}/api/materiallists", "POST", JsonConvert.SerializeObject(ml));
-
-              
-
                 return true;
             }
             catch
@@ -163,9 +175,6 @@ namespace XamarinSysAdmin.Services
         public List<Quire> SelectQuireSpec()
         {
             var list = Request<Quire>("Quires");
-
-
-
             List<Quire> lQ = new List<Quire>();
             foreach (var a in list.ToList())
             {
@@ -196,9 +205,6 @@ namespace XamarinSysAdmin.Services
         public List<MaterialList> SelectMaterialList()
         {
             var list = Request<MaterialList>("materiallists");
-
-
-
             List<MaterialList> materialLists = new List<MaterialList>();
             foreach (var a in list.ToList())
             {
@@ -206,8 +212,7 @@ namespace XamarinSysAdmin.Services
                 {
                     materialLists.Add(a);
                 }
-            }
-          
+            }       
             return materialLists;
         }
 
