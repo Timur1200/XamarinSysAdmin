@@ -22,9 +22,10 @@ namespace XamarinSysAdmin.Views
         protected override void OnAppearing()
         {
             BindingContext = _quire;
-            SpecPicker.ItemsSource = RequestsAPI.get().SelectOnlySpec();
+            _SpecList = RequestsAPI.get().SelectOnlySpec();
+            SpecPicker.ItemsSource = _SpecList;
         }
-
+       private List<Spec> _SpecList { get; set; }
        async private void SaveClick(object sender, EventArgs e)
         {
           if (SpecPicker.SelectedItem == null)
@@ -43,6 +44,20 @@ namespace XamarinSysAdmin.Views
                 await DisplayAlert("Ошибка","Возникли проблемы при отправки данных","ок");
             }
           
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string Text = TextBoxSearch.Text;
+            if (string.IsNullOrEmpty(Text))
+            {
+                SpecPicker.ItemsSource = _SpecList;
+                return;
+            }
+            //SpecPicker.O = true;
+            var SearchedListSpec = _SpecList.Where(q=>q.FIo.ToLower().Contains(Text.ToLower())).ToList();
+            SpecPicker.ItemsSource = SearchedListSpec;
+
         }
     }
 }
