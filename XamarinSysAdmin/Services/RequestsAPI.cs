@@ -21,7 +21,7 @@ namespace XamarinSysAdmin
             if (Context == null) Context = new RequestsAPI();
             return Context;
         }
-        private string  ip //адрес для подключения к API.
+        private string Localip //локальный адрес для подключения к API.
         { // в зависимости от платформа, адрес может отличаться
             get
             {
@@ -40,6 +40,7 @@ namespace XamarinSysAdmin
                 throw new NotImplementedException();
             }
         }
+        private string ip = "timur.somee.com";
         
         private  WebClient client = new WebClient();
         /// <summary>
